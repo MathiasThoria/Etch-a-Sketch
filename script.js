@@ -30,14 +30,40 @@ function printPixels(x=0,y=0){
 }
 function animations(){
     const shakeIt = document.querySelector('.shakeIt');
-    console.log(shakeIt);
+    
+
+    //animation for ShakeIt button
     shakeIt.addEventListener('mouseover', () => {
         shakeIt.classList.add('animationExpandHover');        
-        console.log(shakeIt);
+    
     });
     shakeIt.addEventListener('mouseout', () => {
         shakeIt.classList.remove('animationExpandHover');
-        console.log(shakeIt);
+    
     });
     
+    //animation for knobs
+
+    const resolutionKnob =  document.querySelector('.knobResolution');
+    console.log(resolutionKnob);
+    let rotationNow=0;    
+
+    resolutionKnob.addEventListener('mousedown', (e) =>{
+        x = e.clientX;
+        
+        console.log(MouseEvent.clientX);
+        resolutionKnob.addEventListener('mouseleave',(e2) => {
+            console.log(e2.clientX);
+            if ((x<e2.clientX) && (rotationNow<=30)){                
+                resolutionKnob.style.transform = "rotate(" + (rotationNow + 15) + "deg)";
+                rotationNow+=15;                
+            }   
+            if ((x>e2.clientX) && (rotationNow>=330)){                                
+                resolutionKnob.style.transform = "rotate(" + (rotationNow - 15) + "deg)";
+                rotationNow-=15;                
+            }   
+            console.log(rotationNow);
+        });
+
+    });
 }

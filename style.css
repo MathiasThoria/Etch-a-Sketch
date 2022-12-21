@@ -81,8 +81,7 @@ body{
 .knobText{
     flex: 0 0 auto;    
     text-align: center;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;    
 }
 
 .animationExpandHover{
