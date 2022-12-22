@@ -9,20 +9,7 @@ animations();
 
 
 
-function rotateKnob(e2,e,rotationNow){
 
-    console.log("click out" + e2.clientX);
-    if ((x<e2.clientX) && (rotationNow<=30)){                
-        e.target.style.transform = "rotate(" + (rotationNow + 15) + "deg)";
-        rotationNow+=15;                
-    }   
-    if ((x>e2.clientX) /*&& (rotationNow>=330)*/){                                
-        e.target.style.transform = "rotate(" + (rotationNow - 15) + "deg)";
-        rotationNow-=15;                        
-    }   
-    return rotationNow;
-
-}
 
 
 function printPixels(x=0,y=0){
@@ -46,7 +33,7 @@ function printPixels(x=0,y=0){
     };
 
 
-}
+};
 function animations(){
     const shakeIt = document.querySelector('.shakeIt');
     
@@ -75,29 +62,22 @@ function animations(){
         
         outKnob = document.querySelector('body');
         //console.log(bodyKnob);
-        
-        outKnob.addEventListener('mouseup',(e2) => {
-            rotationNow = rotateKnob(e2,e,rotationNow);           
-        });
+       
 
-        outKnob.removeEventListener('mouseup',(e2) => {
-            rotationNow = rotateKnob(e2,e,rotationNow);           
-        });
+        outKnob.addEventListener('mouseup',(e2)=>{
+            console.log("click out" + e2.clientX);
+            if ((x<e2.clientX) && (rotationNow<=15)){                
+                e.target.style.transform = "rotate(" + (rotationNow + 15) + "deg)";
+                rotationNow+=15;                
+            };   
+            if ((x>e2.clientX) && (rotationNow>=-15)){                                
+                e.target.style.transform = "rotate(" + (rotationNow - 15) + "deg)";
+                rotationNow-=15;                        
+            };  
+            console.log("rotationnow:" + rotationNow);
+        }, { once: true });
+        
+    
     });
 
-    resolutionKnob.removeEventListener('mousedown', (e) =>{
-        x = e.clientX;
-        console.log("click on " + e.clientX);
-        
-        outKnob = document.querySelector('body');
-        //console.log(bodyKnob);
-        
-        outKnob.addEventListener('mouseup',(e2) => {
-            rotationNow = rotateKnob(e2,e,rotationNow);           
-        });
-
-        outKnob.removeEventListener('mouseup',(e2) => {
-            rotationNow = rotateKnob(e2,e,rotationNow);           
-        });
-    });
-}
+};
