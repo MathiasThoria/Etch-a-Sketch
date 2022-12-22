@@ -6,6 +6,25 @@ x = 64;
 y = 48;
 printPixels(x,y);
 animations();
+
+
+
+function rotateKnob(e2,e,rotationNow){
+
+    console.log("click out" + e2.clientX);
+    if ((x<e2.clientX) && (rotationNow<=30)){                
+        e.target.style.transform = "rotate(" + (rotationNow + 15) + "deg)";
+        rotationNow+=15;                
+    }   
+    if ((x>e2.clientX) /*&& (rotationNow>=330)*/){                                
+        e.target.style.transform = "rotate(" + (rotationNow - 15) + "deg)";
+        rotationNow-=15;                        
+    }   
+    return rotationNow;
+
+}
+
+
 function printPixels(x=0,y=0){
     
     
@@ -45,25 +64,40 @@ function animations(){
     //animation for knobs
 
     const resolutionKnob =  document.querySelector('.knobResolution');
+    
+    
     console.log(resolutionKnob);
     let rotationNow=0;    
 
     resolutionKnob.addEventListener('mousedown', (e) =>{
         x = e.clientX;
+        console.log("click on " + e.clientX);
         
-        console.log(MouseEvent.clientX);
-        resolutionKnob.addEventListener('mouseleave',(e2) => {
-            console.log(e2.clientX);
-            if ((x<e2.clientX) && (rotationNow<=30)){                
-                resolutionKnob.style.transform = "rotate(" + (rotationNow + 15) + "deg)";
-                rotationNow+=15;                
-            }   
-            if ((x>e2.clientX) && (rotationNow>=330)){                                
-                resolutionKnob.style.transform = "rotate(" + (rotationNow - 15) + "deg)";
-                rotationNow-=15;                
-            }   
-            console.log(rotationNow);
+        outKnob = document.querySelector('body');
+        //console.log(bodyKnob);
+        
+        outKnob.addEventListener('mouseup',(e2) => {
+            rotationNow = rotateKnob(e2,e,rotationNow);           
         });
 
+        outKnob.removeEventListener('mouseup',(e2) => {
+            rotationNow = rotateKnob(e2,e,rotationNow);           
+        });
+    });
+
+    resolutionKnob.removeEventListener('mousedown', (e) =>{
+        x = e.clientX;
+        console.log("click on " + e.clientX);
+        
+        outKnob = document.querySelector('body');
+        //console.log(bodyKnob);
+        
+        outKnob.addEventListener('mouseup',(e2) => {
+            rotationNow = rotateKnob(e2,e,rotationNow);           
+        });
+
+        outKnob.removeEventListener('mouseup',(e2) => {
+            rotationNow = rotateKnob(e2,e,rotationNow);           
+        });
     });
 }

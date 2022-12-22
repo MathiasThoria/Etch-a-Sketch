@@ -82,6 +82,8 @@ body{
     flex: 0 0 auto;    
     text-align: center;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;    
+    /*text cant be selected*/
+    user-select: none;
 }
 
 .animationExpandHover{
