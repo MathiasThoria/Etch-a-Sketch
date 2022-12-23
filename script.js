@@ -1,5 +1,5 @@
 
-printPixels(32,24,"black");
+printPixels(64,48,"black");
 events();
 
 function printPixels(x,y,colorMode){
@@ -32,7 +32,7 @@ function printPixels(x,y,colorMode){
                 case "crescentBlack":
                     divsito.style.backgroundColor="rgba(0,0,0," + opacity + ")";
                     opacity+=0.01;
-                    console.log(opacity);
+                    
                 break;
                 case "white":
                     divsito.style.backgroundColor="white";
@@ -111,6 +111,7 @@ function events(){
     });
     const colorKnob =  document.querySelector('.knobColorMode');        
     console.log(colorKnob);
+    let rotationNowCol =0;
     colorKnob.addEventListener('mousedown', (ec) =>{
       
         console.log("click on " + ec.clientX);
@@ -120,17 +121,17 @@ function events(){
         outKnob.addEventListener('mouseup',(ec2)=>{
             console.log("click out" + ec2.clientX);
             if ((ec.clientX<ec2.clientX) && (rotationNowRes<=0)){                
-                ec.target.style.transform = "rotate(" + (rotationNowRes + 15) + "deg)";
-                rotationNowRes+=15;                
+                ec.target.style.transform = "rotate(" + (rotationNowCol + 15) + "deg)";
+                rotationNowCol+=15;                
                 subColor++;                
             };   
             if ((ec.clientX>ec2.clientX) && (rotationNowRes>=-15)){                                
-                ec.target.style.transform = "rotate(" + (rotationNowRes - 15) + "deg)";
-                rotationNowRes-=15;                        
+                ec.target.style.transform = "rotate(" + (rotationNowCol - 15) + "deg)";
+                rotationNowCol-=15;                        
                 subColor--;
                 
             };  
-            //console.log("rotationnow:" + rotationNowRes);
+            console.log("rotationnow:" + rotationNowCol);
             //console.log("llamando con " + X[subX]);
             resetCanvas(X[subX],Y[subY],COLORMODE[subColor]);
             
