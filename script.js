@@ -31,28 +31,37 @@ function printPixels(x=0,y=0){
         /*console.log(pixels);*/
         
     };
-
-
 };
+
+function resetCanvas(){
+    const ConteinerCanvas = document.querySelector('.conteinerCanvas');
+    
+    while (ConteinerCanvas.hasChildNodes()) {
+        ConteinerCanvas.removeChild(ConteinerCanvas.firstChild);
+    };
+    printPixels(x,y);
+};
+
+
 function animations(){
     const shakeIt = document.querySelector('.shakeIt');
     
 
     //animation for ShakeIt button
     shakeIt.addEventListener('mouseover', () => {
-        shakeIt.classList.add('animationExpandHover');        
-    
+        shakeIt.classList.add('animationExpandHover');            
+        
     });
     shakeIt.addEventListener('mouseout', () => {
         shakeIt.classList.remove('animationExpandHover');
-    
     });
+
+    shakeIt.addEventListener('mousedown',(ev)=>resetCanvas());
     
     //animation for knobs
 
     const resolutionKnob =  document.querySelector('.knobResolution');
-    
-    
+        
     console.log(resolutionKnob);
     let rotationNow=0;    
 
