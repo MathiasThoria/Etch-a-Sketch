@@ -1,18 +1,8 @@
 
-let x=0;
-let y=0;
+printPixels(32,24);
+events();
 
-x = 64;
-y = 48;
-printPixels(x,y);
-animations();
-
-
-
-
-
-
-function printPixels(x=0,y=0){
+function printPixels(x,y){
     
     
     /*console.log(divsito);*/
@@ -33,21 +23,27 @@ function printPixels(x=0,y=0){
     };
 };
 
-function resetCanvas(){
+function resetCanvas(x,y){
     const ConteinerCanvas = document.querySelector('.conteinerCanvas');
     
     while (ConteinerCanvas.hasChildNodes()) {
         ConteinerCanvas.removeChild(ConteinerCanvas.firstChild);
     };
+    console.log("reseteando con " + x); 
     printPixels(x,y);
 };
 
 
-function animations(){
-    const shakeIt = document.querySelector('.shakeIt');
-    
+function events(){
 
-    //animation for ShakeIt button
+    const X=[16,32,64,128,256];
+    const Y=[12,24,48,96,192];
+
+    const shakeIt = document.querySelector('.shakeIt');
+    subX=2;
+    subY=2;
+
+    //events for ShakeIt button
     shakeIt.addEventListener('mouseover', () => {
         shakeIt.classList.add('animationExpandHover');            
         
@@ -56,15 +52,13 @@ function animations(){
         shakeIt.classList.remove('animationExpandHover');
     });
 
-    shakeIt.addEventListener('mousedown',(ev)=>resetCanvas());
+    shakeIt.addEventListener('mousedown',(ev)=>resetCanvas(X[subX],Y[subY]));
     
-    //animation for knobs
+    //events for knobs
 
-    const resolutionKnob =  document.querySelector('.knobResolution');
-        
+    const resolutionKnob =  document.querySelector('.knobResolution');        
     console.log(resolutionKnob);
     let rotationNow=0;    
-
     resolutionKnob.addEventListener('mousedown', (e) =>{
         x = e.clientX;
         console.log("click on " + e.clientX);
@@ -78,12 +72,20 @@ function animations(){
             if ((x<e2.clientX) && (rotationNow<=15)){                
                 e.target.style.transform = "rotate(" + (rotationNow + 15) + "deg)";
                 rotationNow+=15;                
+                subX++;
+                subY++;                
             };   
             if ((x>e2.clientX) && (rotationNow>=-15)){                                
                 e.target.style.transform = "rotate(" + (rotationNow - 15) + "deg)";
                 rotationNow-=15;                        
+                subX--;
+                subY--;
             };  
             console.log("rotationnow:" + rotationNow);
+            console.log("llamando con " + X[subX]);
+            resetCanvas(X[subX],Y[subY]);
+
+
         }, { once: true });
         
     
